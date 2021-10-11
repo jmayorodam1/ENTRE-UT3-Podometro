@@ -3,7 +3,7 @@
  * acerca de los pasos, distancia, ..... que una persona
  * ha dado en una semana. 
  * 
- * @author    - pon aquí tu nombre - 
+ * @author  Javier Mayor 
  */
 public class Podometro {
     
