@@ -72,10 +72,10 @@ public class Podometro {
         altura = queAltura;
         sexo = queSexo;
         if(sexo == HOMBRE){
-            Math.ceil(altura * ZANCADA_HOMBRE);
+            longitudZancada = Math.ceil(altura * ZANCADA_HOMBRE);
         }
         else {
-            Math.floor(altura * ZANCADA_MUJER);
+            longitudZancada = Math.floor(altura * ZANCADA_MUJER);
         }
         
     }
@@ -97,13 +97,8 @@ public class Podometro {
                             int horaFin) {
 
         tiempo += horaFin - horaInicio;
-        double longZancada;
-        if(sexo == HOMBRE){
-            longZancada = Math.ceil(altura * ZANCADA_HOMBRE);
-        }
-        else {
-            longZancada = Math.floor(altura * ZANCADA_MUJER);
-        }
+        
+     
         
         switch(dia){
             case 1:
@@ -111,13 +106,16 @@ public class Podometro {
             case 3:
             case 4:
             case 5: 
-                totalPasosLaborales += pasos; totalDistanciaSemana += pasos * longZancada ;
+                totalPasosLaborales += pasos; 
+                totalDistanciaSemana += pasos * longitudZancada ;
                 break;
             case 6: 
-                totalPasosSabado += pasos; totalDistanciaSemana += pasos * longZancada;
+                totalPasosSabado += pasos; 
+                totalDistanciaSemana += pasos * longitudZancada;
                 break;
             case 7: 
-                totalPasosDomingo += pasos; totalDistanciaSemana += pasos * longZancada;
+                totalPasosDomingo += pasos; 
+                totalDistanciaSemana += pasos * longitudZancada;
                 break;
         
         }
@@ -136,7 +134,10 @@ public class Podometro {
      *  
      */
     public void printConfiguracion() {
-
+        System.out.println(
+        "Configuracion del podometro\n************************\n\nAltura: " +
+         altura + "mtos\nSexo: " + sexo + "\nLongitud zancada: " + 
+         longitudZancada + "mtos");
         
 
     }
