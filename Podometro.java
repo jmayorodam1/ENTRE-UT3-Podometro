@@ -96,7 +96,35 @@ public class Podometro {
     public void registrarCaminata(int pasos, int dia, int horaInicio,
                             int horaFin) {
 
-       
+        tiempo += horaFin - horaInicio;
+        double longZancada;
+        if(sexo == HOMBRE){
+            longZancada = Math.ceil(altura * ZANCADA_HOMBRE);
+        }
+        else {
+            longZancada = Math.floor(altura * ZANCADA_MUJER);
+        }
+        
+        switch(dia){
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5: 
+                totalPasosLaborales += pasos; totalDistanciaSemana += pasos * longZancada ;
+                break;
+            case 6: 
+                totalPasosSabado += pasos; totalDistanciaSemana += pasos * longZancada;
+                break;
+            case 7: 
+                totalPasosDomingo += pasos; totalDistanciaSemana += pasos * longZancada;
+                break;
+        
+        }
+        
+        if(horaInicio >= 21){
+            caminatasNoche ++;
+        }
 
     }
     
