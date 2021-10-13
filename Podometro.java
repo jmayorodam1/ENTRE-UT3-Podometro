@@ -150,18 +150,7 @@ public class Podometro {
      *  
      */
     public void printEstadísticas() {
-        String str = "";
-        if(totalPasosLaborales > totalPasosSabado && 
-        totalPasosLaborales > totalPasosDomingo ){
-            str = "LABORABLES";
-        }
-        else if(totalPasosLaborales < totalPasosSabado && 
-        totalPasosSabado > totalPasosDomingo ){
-            str = "SABADO";
-        }
-        else{
-            str = "DOMINGO";
-        }
+     
           System.out.println(
         "Estadisticas\n************************\n\nDistania recorrida toda la semana: " 
         + totalDistanciaSemana + "Km\nDistancia recorrida fin de semana: " 
@@ -169,7 +158,7 @@ public class Podometro {
         totalPasosLaborales + "\nNº pasos SABADO: " + totalPasosSabado + "\nNº pasos DOMINGO" + 
         totalPasosDomingo + "\n\nNº caminatas realizadas a partir de las 21h" + 
         caminatasNoche + "\n\nTiempo total caminado en la semana: " + 
-        tiempo + "\nDias con mas pasos caminados: " + str);
+        tiempo + "\nDias con mas pasos caminados: " + diaMayorNumeroPasos());
 
     }
 
@@ -181,7 +170,20 @@ public class Podometro {
      */
     public String diaMayorNumeroPasos() {
 
-         
+            String str = "";
+        if(totalPasosLaborales > totalPasosSabado && 
+        totalPasosLaborales > totalPasosDomingo ){
+            str = "LABORABLES";
+        }
+        else if(totalPasosLaborales < totalPasosSabado && 
+        totalPasosSabado > totalPasosDomingo ){
+            str = "SABADO";
+        }
+        else{
+            str = "DOMINGO";
+        }
+        
+        return str;
 
     }
     
