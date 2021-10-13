@@ -195,7 +195,16 @@ public class Podometro {
      *  
      */    
     public void reset() {
-
+        altura = 0;
+        sexo = MUJER;
+        longitudZancada = 0;
+        totalPasosLaborales = 0;
+        totalPasosSabado = 0;
+        totalPasosDomingo = 0;
+        totalDistanciaSemana = 0;
+        totalDistanciaFinSemana = 0;
+        tiempo = 0;
+        caminatasNoche = 0;
         
 
     }
