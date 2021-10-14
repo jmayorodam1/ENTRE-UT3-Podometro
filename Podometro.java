@@ -69,7 +69,7 @@ public class Podometro {
      */
     public void configurar(double queAltura, char queSexo) {
 
-        altura = queAltura;
+        altura = queAltura ;
         sexo = queSexo;
         if(sexo == HOMBRE){
             longitudZancada = Math.ceil(altura * ZANCADA_HOMBRE);
@@ -107,21 +107,21 @@ public class Podometro {
             case 4:
             case 5: 
                 totalPasosLaborales += pasos; 
-                totalDistanciaSemana += pasos * longitudZancada ;
                 break;
             case 6: 
                 totalPasosSabado += pasos; 
-                totalDistanciaSemana += pasos * longitudZancada;
                 break;
             case 7: 
                 totalPasosDomingo += pasos; 
-                totalDistanciaSemana += pasos * longitudZancada;
                 break;
         
         }
+        totalDistanciaSemana = (totalPasosLaborales + totalPasosSabado +totalPasosDomingo ) * longitudZancada ;
+        totalDistanciaFinSemana = (totalPasosSabado + totalPasosDomingo) * longitudZancada;
+
         
-        if(horaInicio >= 21){
-            caminatasNoche ++;
+        if(horaInicio >= 2100){
+            caminatasNoche++;
         }
 
     }
@@ -135,9 +135,9 @@ public class Podometro {
      */
     public void printConfiguracion() {
         System.out.println(
-        "Configuracion del podometro\n************************\n\nAltura: " +
-         altura + "mtos\nSexo: " + sexo + "\nLongitud zancada: " + 
-         longitudZancada + "mtos");
+        "Configuracion del podometro\n************************\nAltura: " +
+         altura/100 + "mtos\nSexo: " + sexo + "\nLongitud zancada: " + 
+         longitudZancada/100 + "mtos");
         
 
     }
@@ -152,13 +152,13 @@ public class Podometro {
     public void printEstadísticas() {
      
           System.out.println(
-        "Estadisticas\n************************\n\nDistania recorrida toda la semana: " 
-        + totalDistanciaSemana + "Km\nDistancia recorrida fin de semana: " 
-        + totalDistanciaFinSemana + "Km\n\nNº pasos dias laborales " + 
-        totalPasosLaborales + "\nNº pasos SABADO: " + totalPasosSabado + "\nNº pasos DOMINGO" + 
-        totalPasosDomingo + "\n\nNº caminatas realizadas a partir de las 21h" + 
+        "\nEstadisticas\n************************\n\nDistania recorrida toda la semana: " 
+        + totalDistanciaSemana/100000 + "Km\nDistancia recorrida fin de semana: " 
+        + totalDistanciaFinSemana/100000 + "Km\n\nNº pasos dias laborales: " + 
+        totalPasosLaborales + "\nNº pasos SABADO: " + totalPasosSabado + "\nNº pasos DOMINGO: " + 
+        totalPasosDomingo + "\n\nNº caminatas realizadas a partir de las 21h: " + 
         caminatasNoche + "\n\nTiempo total caminado en la semana: " + 
-        tiempo + "\nDias con mas pasos caminados: " + diaMayorNumeroPasos());
+        tiempo/60 + "h " + tiempo % 60 + "m" );
 
     }
 
@@ -179,8 +179,22 @@ public class Podometro {
         totalPasosSabado > totalPasosDomingo ){
             str = "SABADO";
         }
-        else{
+        else if (totalPasosDomingo > totalPasosSabado && 
+        totalPasosDomingo > totalPasosLaborales){
             str = "DOMINGO";
+        }
+        else if((totalPasosLaborales == totalPasosSabado ) &&
+        (totalPasosLaborales > totalPasosDomingo)){
+            return "LABORALES  SABADO";
+        }
+        else if((totalPasosLaborales == totalPasosDomingo) &&
+        (totalPasosLaborales > totalPasosSabado)){
+            return "LABORALES  DOMINGO";
+        }else if((totalPasosDomingo == totalPasosLaborales) &&
+        (totalPasosDomingo == totalPasosSabado)){
+            return "LABORALES  SABADO  DOMINGO";
+        }else{
+            return "SABADO DOMINGO";
         }
         
         return str;
